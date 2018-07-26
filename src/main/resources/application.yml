@@ -1,0 +1,48 @@
+spring:
+  sleuth:
+    enabled : true
+    sampler:
+      percentage: 1.0
+  zipkin:
+    baseUrl:  '@zipkin.server.url@'
+    enabled : false
+  application:
+    name: 'content-turbine'
+  cloud:
+    consul:
+        host: 'localhost'
+        port: 8500
+        discovery:
+          healthCheckPath: '/api/turbine/health'      
+  jackson:
+    serialization-inclusion: NON_EMPTY
+endpoints:
+  prometheus:
+    enable: true
+  health:
+    sensitive: false
+    time-to-live: 100
+server:
+  contextPath: /api/turbine
+  port: '9898'
+project:
+  group: core
+  team: content
+  env: '9088'
+  profile: qaautomation
+  application: 'content-turbine'
+  rabitConfig : 
+    rabitHost : '<ip>'
+    userName  : 'guest'
+    password  : 'guest'
+turbine:
+  appConfig: content-context
+  instanceUrlSuffix: /api/contexttest/hystrix.stream
+  clusterNameExpression: new String("default")
+management:
+  endpoints:
+    web:
+      path-mapping: /
+  security:
+    enabled: false  
+  
